@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     cb(null, "./public");
   },
   filename: function (req, file, cb) {
-    const name = Date.now() + file.originalname;
+    const name = file.originalname;
     cb(null, name);
   },
 });
@@ -17,5 +17,6 @@ const upload = multer({ storage: storage });
 
 router.get("/api", MainController.first);
 router.post("/api/start", upload.single("img"), MainController.start)
-
+router.get("/api/take",MainController.take)
+router.put("/api/drop/:id1/:id2",MainController.drop)
 module.exports = router
